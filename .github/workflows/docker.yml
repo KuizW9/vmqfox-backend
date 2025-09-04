@@ -22,8 +22,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build --platform linux/arm64,linux/amd64 -t ghcr.io/kuizw9/vmqfox-backend:latest .
-
+          docker buildx build --platform linux/arm64 -t ghcr.io/kuizw9/vmqfox-backend:arm64 .
+          docker buildx build --platform linux/amd64 -t ghcr.io/kuizw9/vmqfox-backend:amd64 .
       - name: Push Docker image
         run: |
-          docker push ghcr.io/kuizw9/vmqfox-backend:latest
+          docsker push ghcr.io/kuizw9/vmqfox-backend:amd64
+          docsker push ghcr.io/kuizw9/vmqfox-backend:arm64
