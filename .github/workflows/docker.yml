@@ -20,11 +20,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.G_TOKEN }}
 
-      - name: Build Docker image
-        run: |
-          docker buildx build --platform linux/arm64 -t ghcr.io/kuizw9/vmqfox-backend:arm64 .
-          docker buildx build --platform linux/amd64 -t ghcr.io/kuizw9/vmqfox-backend:amd64 .
-      - name: Push Docker image
-        run: |
-          docsker push ghcr.io/kuizw9/vmqfox-backend:amd64
-          docsker push ghcr.io/kuizw9/vmqfox-backend:arm64
+      - name: Build and Push Docker image
+        with:
+          context: ./
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tag: ghcr.io/kuizw9/vmqfox-backend:latest
